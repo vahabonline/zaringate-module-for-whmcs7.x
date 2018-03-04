@@ -13,6 +13,7 @@
 	}
 
     $Amount = intval($_POST['amount']);
+    $systemUrl = $params['systemurl'];
     
 	if($_POST['currencies'] == 'Rial'){
 		$Amount = round($Amount/10);
@@ -36,7 +37,7 @@
 			break;
 	}
 	
-	$CallbackURL = 'http://' . $_SERVER['SERVER_NAME'] . '/modules/gateways/callback/zarinpalzg.php?invoiceid='. $_POST['invoiceid'] .'&Amount='. $Amount;
+	$CallbackURL = $systemUrl . '/modules/gateways/callback/zarinpalzg.php?invoiceid='. $_POST['invoiceid'] .'&Amount='. $Amount;
 	try {
 		$client = new SoapClient('https://'. $mirror .'.zarinpal.com/pg/services/WebGate/wsdl', array('encoding' => 'UTF-8'));
 	
